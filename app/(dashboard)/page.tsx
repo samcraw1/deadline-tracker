@@ -60,34 +60,37 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Dashboard</h1>
+      <div>
+        <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
+        <p className="text-sm text-muted-foreground mt-1">Track and manage compliance deadlines across all clients.</p>
+      </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card>
+        <Card className="shadow-sm hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Active Clients</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
+            <Users className="h-4 w-4 text-indigo-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totalClients}</div>
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="shadow-sm hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Due This Week</CardTitle>
-            <CalendarClock className="h-4 w-4 text-muted-foreground" />
+            <CalendarClock className="h-4 w-4 text-indigo-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{dueThisWeek}</div>
           </CardContent>
         </Card>
 
-        <Card className={overdue.length > 0 ? "border-2 border-red-400 bg-red-100 shadow-md shadow-red-100" : ""}>
+        <Card className={overdue.length > 0 ? "border-2 border-red-400 bg-red-100 shadow-md shadow-red-100" : "shadow-sm hover:shadow-md transition-shadow"}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Overdue</CardTitle>
             <AlertTriangle
-              className={`h-5 w-5 ${overdue.length > 0 ? "text-red-600 animate-pulse" : "text-muted-foreground"}`}
+              className={`h-5 w-5 ${overdue.length > 0 ? "text-red-600 animate-pulse" : "text-indigo-500"}`}
             />
           </CardHeader>
           <CardContent>
@@ -99,12 +102,12 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="shadow-sm hover:shadow-md transition-shadow">
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">
               Awaiting Confirmation
             </CardTitle>
-            <CheckCircle className="h-4 w-4 text-muted-foreground" />
+            <CheckCircle className="h-4 w-4 text-indigo-500" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{pendingConfirmation}</div>
@@ -164,7 +167,7 @@ export default async function DashboardPage() {
         </Card>
       )}
 
-      <Card>
+      <Card className="shadow-sm">
         <CardHeader>
           <CardTitle>Upcoming Deadlines</CardTitle>
         </CardHeader>

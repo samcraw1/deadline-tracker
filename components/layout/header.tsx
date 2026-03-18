@@ -31,13 +31,13 @@ export function AppHeader({ userName, userEmail }: { userName: string; userEmail
     .slice(0, 2);
 
   return (
-    <header className="flex h-14 items-center gap-4 border-b bg-background px-6">
+    <header className="flex h-14 items-center gap-4 border-b bg-white/80 backdrop-blur-sm px-6 shadow-sm">
       <SidebarTrigger />
       <div className="flex-1" />
       <DropdownMenu>
         <DropdownMenuTrigger render={<Button variant="ghost" className="gap-2" />}>
           <Avatar className="h-7 w-7">
-            <AvatarFallback className="text-xs">{initials}</AvatarFallback>
+            <AvatarFallback className="text-xs bg-indigo-100 text-indigo-700 font-semibold">{initials}</AvatarFallback>
           </Avatar>
           <span className="text-sm">{userName}</span>
         </DropdownMenuTrigger>

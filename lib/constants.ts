@@ -1,8 +1,8 @@
 export const STATUS_COLORS = {
-  overdue: "bg-red-100 text-red-800 border-red-200",
-  pending: "bg-yellow-100 text-yellow-800 border-yellow-200",
-  sent: "bg-blue-100 text-blue-800 border-blue-200",
-  confirmed: "bg-green-100 text-green-800 border-green-200",
+  overdue: "bg-red-50 text-red-700 border-red-300",
+  pending: "bg-amber-50 text-amber-700 border-amber-300",
+  sent: "bg-blue-50 text-blue-700 border-blue-300",
+  confirmed: "bg-emerald-50 text-emerald-700 border-emerald-300",
 } as const;
 
 export const PLAN_TYPE_LABELS: Record<string, string> = {

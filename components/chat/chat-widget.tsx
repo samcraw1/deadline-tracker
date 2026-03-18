@@ -98,9 +98,9 @@ export function ChatWidget() {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-zinc-900 px-5 py-3 text-sm font-medium text-white shadow-lg transition-all hover:bg-zinc-700 hover:shadow-xl"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white shadow-lg transition-all hover:bg-slate-800 hover:shadow-xl"
       >
-        <MessageCircle className="h-5 w-5" />
+        <MessageCircle className="h-5 w-5 text-indigo-400" />
         DOL Assistant
       </button>
     );
@@ -111,12 +111,12 @@ export function ChatWidget() {
       style={{ height: "520px" }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between border-b bg-zinc-900 px-4 py-3 text-white">
+      <div className="flex items-center justify-between border-b bg-slate-900 px-4 py-3 text-white">
         <div className="flex items-center gap-2">
-          <Bot className="h-5 w-5" />
+          <Bot className="h-5 w-5 text-indigo-400" />
           <span className="text-sm font-medium">DOL Compliance Assistant</span>
         </div>
-        <button onClick={() => setIsOpen(false)} className="rounded p-1 hover:bg-zinc-700">
+        <button onClick={() => setIsOpen(false)} className="rounded p-1 hover:bg-slate-700">
           <X className="h-4 w-4" />
         </button>
       </div>
@@ -129,21 +129,21 @@ export function ChatWidget() {
             className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
           >
             {msg.role === "assistant" && (
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-zinc-100">
-                <Bot className="h-4 w-4 text-zinc-600" />
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-indigo-100">
+                <Bot className="h-4 w-4 text-indigo-600" />
               </div>
             )}
             <div
               className={`max-w-[80%] rounded-lg px-3 py-2 text-sm leading-relaxed ${
                 msg.role === "user"
-                  ? "bg-zinc-900 text-white"
-                  : "bg-zinc-100 text-zinc-800"
+                  ? "bg-indigo-600 text-white"
+                  : "bg-slate-100 text-slate-800"
               }`}
             >
               <div className="whitespace-pre-wrap">{msg.content}</div>
             </div>
             {msg.role === "user" && (
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-zinc-900">
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-indigo-600">
                 <User className="h-4 w-4 text-white" />
               </div>
             )}
@@ -151,14 +151,14 @@ export function ChatWidget() {
         ))}
         {isLoading && messages[messages.length - 1]?.role === "user" && (
           <div className="flex gap-2">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-zinc-100">
-              <Bot className="h-4 w-4 text-zinc-600" />
+            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-indigo-100">
+              <Bot className="h-4 w-4 text-indigo-600" />
             </div>
-            <div className="rounded-lg bg-zinc-100 px-3 py-2">
+            <div className="rounded-lg bg-slate-100 px-3 py-2">
               <div className="flex gap-1">
-                <div className="h-2 w-2 animate-bounce rounded-full bg-zinc-400" style={{ animationDelay: "0ms" }} />
-                <div className="h-2 w-2 animate-bounce rounded-full bg-zinc-400" style={{ animationDelay: "150ms" }} />
-                <div className="h-2 w-2 animate-bounce rounded-full bg-zinc-400" style={{ animationDelay: "300ms" }} />
+                <div className="h-2 w-2 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: "0ms" }} />
+                <div className="h-2 w-2 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: "150ms" }} />
+                <div className="h-2 w-2 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: "300ms" }} />
               </div>
             </div>
           </div>
@@ -180,7 +180,7 @@ export function ChatWidget() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask about DOL compliance..."
-            className="flex-1 rounded-md border px-3 py-2 text-sm outline-none focus:border-zinc-400 focus:ring-1 focus:ring-zinc-400"
+            className="flex-1 rounded-md border px-3 py-2 text-sm outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400"
             disabled={isLoading}
           />
           <Button

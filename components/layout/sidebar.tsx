@@ -13,6 +13,7 @@ import {
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -41,10 +42,12 @@ export function AppSidebar({ userRole }: { userRole: string }) {
 
   return (
     <Sidebar>
-      <SidebarHeader className="border-b px-6 py-4">
-        <Link href="/" className="flex items-center gap-2 font-semibold">
-          <CalendarClock className="h-5 w-5" />
-          <span>Deadline Tracker</span>
+      <SidebarHeader className="border-b border-sidebar-border px-6 py-4">
+        <Link href="/" className="flex items-center gap-3 font-bold">
+          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-indigo-500/20">
+            <CalendarClock className="h-4 w-4 text-indigo-400" />
+          </div>
+          <span className="tracking-tight">Deadline Tracker</span>
         </Link>
       </SidebarHeader>
       <SidebarContent>
@@ -71,6 +74,9 @@ export function AppSidebar({ userRole }: { userRole: string }) {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter className="border-t border-sidebar-border px-6 py-3">
+        <span className="text-xs text-sidebar-foreground/40">v1.0</span>
+      </SidebarFooter>
     </Sidebar>
   );
 }
