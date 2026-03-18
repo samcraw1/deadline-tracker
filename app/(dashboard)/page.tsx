@@ -61,53 +61,65 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
+        <h1 className="text-2xl font-bold" style={{ color: "#111827" }}>Dashboard</h1>
         <p className="text-sm text-muted-foreground mt-1">Track and manage compliance deadlines across all clients.</p>
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <Card className="shadow-sm hover:shadow-md transition-shadow">
+        <Card style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Active Clients</CardTitle>
-            <Users className="h-4 w-4 text-indigo-500" />
+            <Users style={{ width: 16, height: 16, color: "#003366" }} />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totalClients}</div>
           </CardContent>
         </Card>
 
-        <Card className="shadow-sm hover:shadow-md transition-shadow">
+        <Card style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Due This Week</CardTitle>
-            <CalendarClock className="h-4 w-4 text-indigo-500" />
+            <CalendarClock style={{ width: 16, height: 16, color: "#003366" }} />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{dueThisWeek}</div>
           </CardContent>
         </Card>
 
-        <Card className={overdue.length > 0 ? "border-2 border-red-400 bg-red-100 shadow-md shadow-red-100" : "shadow-sm hover:shadow-md transition-shadow"}>
+        <Card
+          style={
+            overdue.length > 0
+              ? { border: "2px solid #fca5a5", backgroundColor: "#fef2f2", boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }
+              : { boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }
+          }
+        >
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Overdue</CardTitle>
             <AlertTriangle
-              className={`h-5 w-5 ${overdue.length > 0 ? "text-red-600 animate-pulse" : "text-indigo-500"}`}
+              className={overdue.length > 0 ? "animate-pulse" : ""}
+              style={{ width: 20, height: 20, color: overdue.length > 0 ? "#DC3545" : "#003366" }}
             />
           </CardHeader>
           <CardContent>
             <div
-              className={`font-bold ${overdue.length > 0 ? "text-3xl font-black text-red-700" : "text-2xl"}`}
+              className="font-bold"
+              style={
+                overdue.length > 0
+                  ? { fontSize: "1.875rem", color: "#DC3545" }
+                  : { fontSize: "1.5rem" }
+              }
             >
               {overdue.length}
             </div>
           </CardContent>
         </Card>
 
-        <Card className="shadow-sm hover:shadow-md transition-shadow">
+        <Card style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">
               Awaiting Confirmation
             </CardTitle>
-            <CheckCircle className="h-4 w-4 text-indigo-500" />
+            <CheckCircle style={{ width: 16, height: 16, color: "#003366" }} />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{pendingConfirmation}</div>
@@ -116,10 +128,10 @@ export default async function DashboardPage() {
       </div>
 
       {overdue.length > 0 && (
-        <Card className="border-2 border-red-300 bg-red-50/50">
+        <Card style={{ border: "2px solid #fca5a5", backgroundColor: "#fff5f5" }}>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2 text-red-700">
-              <AlertTriangle className="h-5 w-5" />
+            <CardTitle className="flex items-center gap-2" style={{ color: "#DC3545" }}>
+              <AlertTriangle style={{ width: 20, height: 20 }} />
               Overdue Deadlines — Immediate Action Required
             </CardTitle>
           </CardHeader>
@@ -136,14 +148,20 @@ export default async function DashboardPage() {
               </TableHeader>
               <TableBody>
                 {overdue.map((d) => (
-                  <TableRow key={d.id} className="bg-red-50 hover:bg-red-100 border-l-4 border-l-red-500">
+                  <TableRow
+                    key={d.id}
+                    style={{
+                      backgroundColor: "#fef2f2",
+                      borderLeft: "4px solid #DC3545",
+                    }}
+                  >
                     <TableCell>
                       <Link
                         href={`/clients/${d.client_id}`}
                         className="font-medium hover:underline"
                       >
                         <span className="flex items-center gap-1.5">
-                          <AlertTriangle className="h-3.5 w-3.5 text-red-500" />
+                          <AlertTriangle style={{ width: 14, height: 14, color: "#DC3545" }} />
                           {d.client?.name}
                         </span>
                       </Link>
@@ -167,7 +185,7 @@ export default async function DashboardPage() {
         </Card>
       )}
 
-      <Card className="shadow-sm">
+      <Card style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
         <CardHeader>
           <CardTitle>Upcoming Deadlines</CardTitle>
         </CardHeader>

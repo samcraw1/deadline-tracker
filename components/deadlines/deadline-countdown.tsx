@@ -8,23 +8,23 @@ export function DeadlineCountdown({ dueDate }: { dueDate: string }) {
 
   if (days < 0) {
     return (
-      <span className="font-bold text-red-700">
+      <span className="font-bold" style={{ color: "#DC3545" }}>
         {Math.abs(days)}d overdue!
       </span>
     );
   }
 
   if (days === 0) {
-    return <span className="font-medium text-red-600">Due today</span>;
+    return <span className="font-medium" style={{ color: "#DC3545" }}>Due today</span>;
   }
 
   if (days <= 7) {
-    return <span className="font-medium text-red-600">{days}d left</span>;
+    return <span className="font-medium" style={{ color: "#DC3545" }}>{days}d left</span>;
   }
 
   if (days <= 30) {
-    return <span className="font-medium text-yellow-600">{days}d left</span>;
+    return <span className="font-medium" style={{ color: "#d97706" }}>{days}d left</span>;
   }
 
-  return <span className="text-green-600">{days}d left</span>;
+  return <span style={{ color: "#28A745" }}>{days}d left</span>;
 }

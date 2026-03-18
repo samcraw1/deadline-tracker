@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { MessageCircle, X, Send, Bot, User } from "lucide-react";
 
 type Message = {
@@ -98,26 +97,49 @@ export function ChatWidget() {
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full bg-slate-900 px-5 py-3 text-sm font-medium text-white shadow-lg transition-all hover:bg-slate-800 hover:shadow-xl"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 rounded-full px-5 py-3 text-sm font-medium transition-all"
+        style={{
+          backgroundColor: "#003366",
+          color: "#ffffff",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.15)",
+        }}
+        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#002244")}
+        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "#003366")}
       >
-        <MessageCircle className="h-5 w-5 text-indigo-400" />
+        <MessageCircle style={{ width: 20, height: 20 }} />
         DOL Assistant
       </button>
     );
   }
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex w-[400px] flex-col overflow-hidden rounded-xl border bg-white shadow-2xl"
-      style={{ height: "520px" }}
+    <div
+      className="fixed bottom-6 right-6 z-50 flex flex-col overflow-hidden rounded-xl"
+      style={{
+        width: 400,
+        height: 520,
+        backgroundColor: "#ffffff",
+        boxShadow: "0 8px 30px rgba(0,0,0,0.15)",
+        border: "1px solid #e2e8f0",
+      }}
     >
       {/* Header */}
-      <div className="flex items-center justify-between border-b bg-slate-900 px-4 py-3 text-white">
+      <div
+        className="flex items-center justify-between px-4 py-3"
+        style={{ backgroundColor: "#003366", color: "#ffffff" }}
+      >
         <div className="flex items-center gap-2">
-          <Bot className="h-5 w-5 text-indigo-400" />
+          <Bot style={{ width: 20, height: 20 }} />
           <span className="text-sm font-medium">DOL Compliance Assistant</span>
         </div>
-        <button onClick={() => setIsOpen(false)} className="rounded p-1 hover:bg-slate-700">
-          <X className="h-4 w-4" />
+        <button
+          onClick={() => setIsOpen(false)}
+          className="rounded p-1 transition-colors"
+          style={{ color: "#ffffff" }}
+          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#002244")}
+          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+        >
+          <X style={{ width: 16, height: 16 }} />
         </button>
       </div>
 
@@ -129,36 +151,46 @@ export function ChatWidget() {
             className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
           >
             {msg.role === "assistant" && (
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-indigo-100">
-                <Bot className="h-4 w-4 text-indigo-600" />
+              <div
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
+                style={{ backgroundColor: "#EEF2FF" }}
+              >
+                <Bot style={{ width: 16, height: 16, color: "#0066CC" }} />
               </div>
             )}
             <div
-              className={`max-w-[80%] rounded-lg px-3 py-2 text-sm leading-relaxed ${
+              className="max-w-[80%] rounded-lg px-3 py-2 text-sm leading-relaxed"
+              style={
                 msg.role === "user"
-                  ? "bg-indigo-600 text-white"
-                  : "bg-slate-100 text-slate-800"
-              }`}
+                  ? { backgroundColor: "#0066CC", color: "#ffffff" }
+                  : { backgroundColor: "#f1f5f9", color: "#111827" }
+              }
             >
               <div className="whitespace-pre-wrap">{msg.content}</div>
             </div>
             {msg.role === "user" && (
-              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-indigo-600">
-                <User className="h-4 w-4 text-white" />
+              <div
+                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
+                style={{ backgroundColor: "#0066CC" }}
+              >
+                <User style={{ width: 16, height: 16, color: "#ffffff" }} />
               </div>
             )}
           </div>
         ))}
         {isLoading && messages[messages.length - 1]?.role === "user" && (
           <div className="flex gap-2">
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-indigo-100">
-              <Bot className="h-4 w-4 text-indigo-600" />
+            <div
+              className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full"
+              style={{ backgroundColor: "#EEF2FF" }}
+            >
+              <Bot style={{ width: 16, height: 16, color: "#0066CC" }} />
             </div>
-            <div className="rounded-lg bg-slate-100 px-3 py-2">
+            <div className="rounded-lg px-3 py-2" style={{ backgroundColor: "#f1f5f9" }}>
               <div className="flex gap-1">
-                <div className="h-2 w-2 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: "0ms" }} />
-                <div className="h-2 w-2 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: "150ms" }} />
-                <div className="h-2 w-2 animate-bounce rounded-full bg-slate-400" style={{ animationDelay: "300ms" }} />
+                <div className="h-2 w-2 animate-bounce rounded-full" style={{ backgroundColor: "#94a3b8", animationDelay: "0ms" }} />
+                <div className="h-2 w-2 animate-bounce rounded-full" style={{ backgroundColor: "#94a3b8", animationDelay: "150ms" }} />
+                <div className="h-2 w-2 animate-bounce rounded-full" style={{ backgroundColor: "#94a3b8", animationDelay: "300ms" }} />
               </div>
             </div>
           </div>
@@ -166,7 +198,7 @@ export function ChatWidget() {
       </div>
 
       {/* Input */}
-      <div className="border-t p-3">
+      <div className="p-3" style={{ borderTop: "1px solid #e2e8f0" }}>
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -180,17 +212,34 @@ export function ChatWidget() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask about DOL compliance..."
-            className="flex-1 rounded-md border px-3 py-2 text-sm outline-none focus:border-indigo-400 focus:ring-1 focus:ring-indigo-400"
+            className="flex-1 rounded-md px-3 py-2 text-sm outline-none"
+            style={{
+              border: "1px solid #e2e8f0",
+              fontSize: 14,
+            }}
+            onFocus={(e) => {
+              e.currentTarget.style.borderColor = "#0066CC";
+              e.currentTarget.style.boxShadow = "0 0 0 2px rgba(37,99,235,0.15)";
+            }}
+            onBlur={(e) => {
+              e.currentTarget.style.borderColor = "#e2e8f0";
+              e.currentTarget.style.boxShadow = "none";
+            }}
             disabled={isLoading}
           />
-          <Button
+          <button
             type="submit"
-            size="sm"
             disabled={isLoading || !input.trim()}
-            className="px-3"
+            className="rounded-md px-3 py-2 transition-colors"
+            style={{
+              backgroundColor: isLoading || !input.trim() ? "#93c5fd" : "#0066CC",
+              color: "#ffffff",
+              border: "none",
+              cursor: isLoading || !input.trim() ? "not-allowed" : "pointer",
+            }}
           >
-            <Send className="h-4 w-4" />
-          </Button>
+            <Send style={{ width: 16, height: 16 }} />
+          </button>
         </form>
       </div>
     </div>

@@ -1,9 +1,9 @@
-export const STATUS_COLORS = {
-  overdue: "bg-red-50 text-red-700 border-red-300",
-  pending: "bg-amber-50 text-amber-700 border-amber-300",
-  sent: "bg-blue-50 text-blue-700 border-blue-300",
-  confirmed: "bg-emerald-50 text-emerald-700 border-emerald-300",
-} as const;
+export const STATUS_COLORS: Record<string, { bg: string; text: string; border: string }> = {
+  overdue: { bg: "#fef2f2", text: "#DC3545", border: "#f9a8af" },
+  pending: { bg: "#fff8e1", text: "#856404", border: "#FFC107" },
+  sent: { bg: "#e8f0fe", text: "#0066CC", border: "#93c5fd" },
+  confirmed: { bg: "#e8f5e9", text: "#28A745", border: "#81c784" },
+};
 
 export const PLAN_TYPE_LABELS: Record<string, string> = {
   "401k": "401(k)",

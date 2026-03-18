@@ -29,7 +29,7 @@ export default async function DashboardLayout({
 
   return (
     <SidebarProvider>
-      <AppSidebar userRole={userRole} />
+      <AppSidebar userRole={userRole} userEmail={userEmail} />
       <SidebarInset>
         <AppHeader userName={userName} userEmail={userEmail} />
         <main className="flex-1 overflow-auto p-6">{children}</main>

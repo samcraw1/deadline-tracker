@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useRouter } from "next/navigation";
-import { CalendarClock, Shield } from "lucide-react";
+import { CalendarClock, Shield, BarChart3, Clock, ShieldCheck } from "lucide-react";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -34,117 +33,288 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex min-h-screen">
-      {/* Left Brand Panel */}
-      <div className="hidden lg:flex lg:w-1/2 bg-slate-900 relative overflow-hidden flex-col justify-between p-12">
-        {/* Decorative grid pattern */}
+    <div className="flex min-h-screen" style={{ borderLeft: "4px solid #0066CC" }}>
+      {/* Left Brand Panel — 45% */}
+      <div
+        className="hidden lg:flex relative overflow-hidden flex-col justify-between p-14"
+        style={{ width: "45%", backgroundColor: "#003366" }}
+      >
+        {/* Dot grid pattern overlay */}
         <div
-          className="absolute inset-0 opacity-[0.04]"
+          className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
+              "radial-gradient(circle, rgba(255,255,255,0.15) 1px, transparent 1px)",
+            backgroundSize: "24px 24px",
           }}
         />
 
-        {/* Subtle gradient accent */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
-        <div className="absolute bottom-0 left-0 w-72 h-72 bg-indigo-400/5 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2" />
+        {/* Glowing horizontal accent line */}
+        <div
+          className="absolute left-0 right-0"
+          style={{
+            top: "45%",
+            height: "1px",
+            background:
+              "linear-gradient(to right, transparent, rgba(59,130,246,0.4), transparent)",
+          }}
+        />
 
+        {/* Corner bracket — top left */}
+        <div
+          className="absolute"
+          style={{
+            top: 32,
+            left: 32,
+            width: 48,
+            height: 48,
+            borderLeft: "2px solid rgba(59,130,246,0.35)",
+            borderTop: "2px solid rgba(59,130,246,0.35)",
+          }}
+        />
+        {/* Corner bracket — bottom right */}
+        <div
+          className="absolute"
+          style={{
+            bottom: 32,
+            right: 32,
+            width: 48,
+            height: 48,
+            borderRight: "2px solid rgba(59,130,246,0.35)",
+            borderBottom: "2px solid rgba(59,130,246,0.35)",
+          }}
+        />
+
+        {/* Ambient glow */}
+        <div
+          className="absolute rounded-full"
+          style={{
+            top: "20%",
+            right: "20%",
+            width: 500,
+            height: 500,
+            backgroundColor: "rgba(59,130,246,0.06)",
+            filter: "blur(100px)",
+          }}
+        />
+
+        {/* Logo */}
         <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="flex items-center justify-center w-10 h-10 rounded-lg bg-indigo-500/20">
-              <CalendarClock className="h-5 w-5 text-indigo-400" />
+          <div className="flex items-center gap-3">
+            <div
+              className="flex items-center justify-center rounded-lg"
+              style={{
+                width: 40,
+                height: 40,
+                backgroundColor: "rgba(59,130,246,0.15)",
+                border: "1px solid rgba(59,130,246,0.25)",
+              }}
+            >
+              <CalendarClock style={{ width: 20, height: 20, color: "#60A5FA" }} />
             </div>
-            <span className="text-xl font-bold text-white tracking-tight">
+            <span
+              className="text-xl font-bold tracking-tight"
+              style={{ color: "#FFFFFF" }}
+            >
               Deadline Tracker
             </span>
           </div>
         </div>
 
-        <div className="relative z-10 space-y-6">
-          <h1 className="text-4xl font-bold text-white leading-tight">
-            DOL retirement plan compliance,{" "}
-            <span className="text-indigo-400">automated.</span>
+        {/* Hero text */}
+        <div className="relative z-10" style={{ maxWidth: 540 }}>
+          <h1
+            className="font-bold tracking-tight"
+            style={{ fontSize: "3rem", lineHeight: 1.1, color: "#FFFFFF" }}
+          >
+            DOL retirement plan
+            <br />
+            compliance, <span style={{ color: "#60A5FA" }}>automated.</span>
           </h1>
-          <p className="text-lg text-slate-400 max-w-md leading-relaxed">
+          <p
+            className="leading-relaxed"
+            style={{ fontSize: "1.125rem", color: "#94A3B8", marginTop: 24 }}
+          >
             Track every notice deadline across all your plans. Never miss a
             filing date again.
           </p>
-          <div className="flex items-center gap-3 pt-4">
-            <div className="flex items-center gap-2 text-sm text-slate-500">
-              <Shield className="h-4 w-4" />
-              <span>ERISA & DOL Compliant</span>
+
+          {/* Trust stats */}
+          <div className="flex items-center gap-8" style={{ marginTop: 32 }}>
+            <div className="flex items-center gap-2">
+              <BarChart3 style={{ width: 16, height: 16, color: "#64748B" }} />
+              <span style={{ fontSize: 14, color: "#64748B" }}>
+                15 notice types tracked
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock style={{ width: 16, height: 16, color: "#64748B" }} />
+              <span style={{ fontSize: 14, color: "#64748B" }}>
+                Zero missed deadlines
+              </span>
+            </div>
+            <div className="flex items-center gap-2">
+              <ShieldCheck style={{ width: 16, height: 16, color: "#64748B" }} />
+              <span style={{ fontSize: 14, color: "#64748B" }}>
+                SOC II certified
+              </span>
             </div>
           </div>
         </div>
 
-        <div className="relative z-10 text-sm text-slate-600">
+        {/* Footer */}
+        <div className="relative z-10" style={{ fontSize: 14, color: "#475569" }}>
           &copy; {new Date().getFullYear()} Deadline Tracker
         </div>
       </div>
 
-      {/* Right Login Panel */}
-      <div className="flex flex-1 items-center justify-center bg-white px-6">
-        <div className="w-full max-w-sm space-y-8">
+      {/* Right Login Panel — 55% */}
+      <div
+        className="flex flex-1 px-6"
+        style={{
+          backgroundColor: "#F8FAFC",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          minHeight: "100vh",
+        }}
+      >
+        <div style={{ width: "100%", maxWidth: 400 }}>
           {/* Mobile logo */}
-          <div className="lg:hidden flex items-center gap-2 justify-center mb-4">
-            <div className="flex items-center justify-center w-9 h-9 rounded-lg bg-slate-900">
-              <CalendarClock className="h-4.5 w-4.5 text-indigo-400" />
+          <div className="lg:hidden flex items-center gap-2 justify-center" style={{ marginBottom: 32 }}>
+            <div
+              className="flex items-center justify-center rounded-lg"
+              style={{ width: 36, height: 36, backgroundColor: "#003366" }}
+            >
+              <CalendarClock style={{ width: 18, height: 18, color: "#60A5FA" }} />
             </div>
-            <span className="text-lg font-bold text-slate-900 tracking-tight">
+            <span className="text-lg font-bold tracking-tight" style={{ color: "#003366" }}>
               Deadline Tracker
             </span>
           </div>
 
-          <div className="text-center space-y-2">
-            <h2 className="text-2xl font-bold text-slate-900">Welcome back</h2>
-            <p className="text-sm text-slate-500">
-              Sign in to manage plan notice deadlines
-            </p>
-          </div>
-
-          <form onSubmit={handleLogin} className="space-y-5">
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-slate-700">
-                Email
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@company.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                className="h-11"
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password" className="text-slate-700">
-                Password
-              </Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                className="h-11"
-              />
-            </div>
-            {error && (
-              <p className="text-sm text-red-600 bg-red-50 rounded-md px-3 py-2">
-                {error}
+          {/* Form card */}
+          <div
+            className="rounded-2xl"
+            style={{
+              backgroundColor: "#FFFFFF",
+              boxShadow: "0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)",
+              border: "1px solid rgba(226,232,240,0.8)",
+              padding: 40,
+            }}
+          >
+            <div className="text-center" style={{ marginBottom: 32 }}>
+              <h2 className="text-2xl font-bold" style={{ color: "#003366" }}>
+                Welcome back
+              </h2>
+              <p style={{ fontSize: 14, color: "#64748B", marginTop: 8 }}>
+                Sign in to manage plan notice deadlines
               </p>
-            )}
-            <Button
-              type="submit"
-              className="w-full h-11 text-sm font-semibold"
-              disabled={loading}
-            >
-              {loading ? "Signing in..." : "Sign in"}
-            </Button>
-          </form>
+            </div>
+
+            <form onSubmit={handleLogin}>
+              <div style={{ marginBottom: 20 }}>
+                <Label
+                  htmlFor="email"
+                  className="text-sm font-medium"
+                  style={{ color: "#334155" }}
+                >
+                  Email
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="you@company.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="mt-2"
+                  style={{
+                    height: 44,
+                    borderRadius: 8,
+                    borderColor: "#CBD5E1",
+                    fontSize: 14,
+                  }}
+                />
+              </div>
+              <div style={{ marginBottom: 20 }}>
+                <Label
+                  htmlFor="password"
+                  className="text-sm font-medium"
+                  style={{ color: "#334155" }}
+                >
+                  Password
+                </Label>
+                <Input
+                  id="password"
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                  className="mt-2"
+                  style={{
+                    height: 44,
+                    borderRadius: 8,
+                    borderColor: "#CBD5E1",
+                    fontSize: 14,
+                  }}
+                />
+              </div>
+
+              {error && (
+                <p
+                  className="text-sm rounded-lg"
+                  style={{
+                    color: "#DC2626",
+                    backgroundColor: "#FEF2F2",
+                    padding: "10px 12px",
+                    marginBottom: 20,
+                  }}
+                >
+                  {error}
+                </p>
+              )}
+
+              {/* ERISA badge */}
+              <div
+                className="flex items-center justify-center gap-2"
+                style={{ padding: "4px 0", marginBottom: 16 }}
+              >
+                <Shield style={{ width: 14, height: 14, color: "#94A3B8" }} />
+                <span
+                  className="font-medium"
+                  style={{ fontSize: 12, color: "#94A3B8" }}
+                >
+                  ERISA & DOL Compliant
+                </span>
+              </div>
+
+              {/* Sign in button */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="font-semibold transition-all"
+                style={{
+                  width: "100%",
+                  height: 44,
+                  borderRadius: 8,
+                  backgroundColor: loading ? "#93C5FD" : "#0066CC",
+                  color: "#FFFFFF",
+                  fontSize: 14,
+                  cursor: loading ? "not-allowed" : "pointer",
+                  border: "none",
+                }}
+                onMouseEnter={(e) => {
+                  if (!loading) e.currentTarget.style.backgroundColor = "#002244";
+                }}
+                onMouseLeave={(e) => {
+                  if (!loading) e.currentTarget.style.backgroundColor = "#0066CC";
+                }}
+              >
+                {loading ? "Signing in..." : "Sign in"}
+              </button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
