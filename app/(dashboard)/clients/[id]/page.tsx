@@ -20,6 +20,7 @@ import { format } from "date-fns";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
 import { RegenerateButton } from "@/components/clients/regenerate-button";
+import { ExportButton } from "@/components/clients/export-button";
 import type { DeadlineWithNoticeType, AlertWithJoins } from "@/lib/types/queries";
 
 export default async function ClientDetailPage({
@@ -74,6 +75,7 @@ export default async function ClientDetailPage({
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold">{client.name}</h1>
         <div className="flex gap-2">
+          <ExportButton clientId={client.id} clientName={client.name} deadlines={deadlines} />
           <RegenerateButton clientId={client.id} />
           <Link href={`/clients/${id}/edit`}>
             <Button variant="outline">

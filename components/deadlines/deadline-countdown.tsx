@@ -8,8 +8,8 @@ export function DeadlineCountdown({ dueDate }: { dueDate: string }) {
 
   if (days < 0) {
     return (
-      <span className="font-medium text-red-600">
-        {Math.abs(days)}d overdue
+      <span className="font-bold text-red-700">
+        {Math.abs(days)}d overdue!
       </span>
     );
   }

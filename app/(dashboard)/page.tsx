@@ -83,16 +83,16 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className={overdue.length > 0 ? "border-red-200 bg-red-50" : ""}>
+        <Card className={overdue.length > 0 ? "border-2 border-red-400 bg-red-100 shadow-md shadow-red-100" : ""}>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-sm font-medium">Overdue</CardTitle>
             <AlertTriangle
-              className={`h-4 w-4 ${overdue.length > 0 ? "text-red-600" : "text-muted-foreground"}`}
+              className={`h-5 w-5 ${overdue.length > 0 ? "text-red-600 animate-pulse" : "text-muted-foreground"}`}
             />
           </CardHeader>
           <CardContent>
             <div
-              className={`text-2xl font-bold ${overdue.length > 0 ? "text-red-600" : ""}`}
+              className={`font-bold ${overdue.length > 0 ? "text-3xl font-black text-red-700" : "text-2xl"}`}
             >
               {overdue.length}
             </div>
@@ -113,9 +113,12 @@ export default async function DashboardPage() {
       </div>
 
       {overdue.length > 0 && (
-        <Card className="border-red-200">
+        <Card className="border-2 border-red-300 bg-red-50/50">
           <CardHeader>
-            <CardTitle className="text-red-600">Overdue Deadlines</CardTitle>
+            <CardTitle className="flex items-center gap-2 text-red-700">
+              <AlertTriangle className="h-5 w-5" />
+              Overdue Deadlines — Immediate Action Required
+            </CardTitle>
           </CardHeader>
           <CardContent>
             <Table>
@@ -124,22 +127,25 @@ export default async function DashboardPage() {
                   <TableHead>Client</TableHead>
                   <TableHead>Notice</TableHead>
                   <TableHead>Due Date</TableHead>
-                  <TableHead>Status</TableHead>
+                  <TableHead>Overdue By</TableHead>
                   <TableHead></TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {overdue.map((d) => (
-                  <TableRow key={d.id}>
+                  <TableRow key={d.id} className="bg-red-50 hover:bg-red-100 border-l-4 border-l-red-500">
                     <TableCell>
                       <Link
                         href={`/clients/${d.client_id}`}
                         className="font-medium hover:underline"
                       >
-                        {d.client?.name}
+                        <span className="flex items-center gap-1.5">
+                          <AlertTriangle className="h-3.5 w-3.5 text-red-500" />
+                          {d.client?.name}
+                        </span>
                       </Link>
                     </TableCell>
-                    <TableCell>{d.notice_type?.name}</TableCell>
+                    <TableCell className="font-medium">{d.notice_type?.name}</TableCell>
                     <TableCell>{d.due_date}</TableCell>
                     <TableCell>
                       <DeadlineCountdown dueDate={d.due_date} />
