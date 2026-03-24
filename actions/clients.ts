@@ -114,3 +114,44 @@ export async function regenerateDeadlinesAction(clientId: string) {
   revalidatePath("/deadlines");
   revalidatePath("/");
 }
+
+export async function bulkImportClients(
+  clients: {
+    name: string;
+    plan_type: string;
+    plan_year_end: string;
+    participant_count: number | null;
+    has_safe_harbor: boolean;
+    has_auto_enrollment: boolean;
+    has_rmd: boolean;
+    contact_name: string | null;
+    contact_email: string | null;
+  }[]
+) {
+  const supabase = await createClient();
+  const results = [];
+
+  for (const clientData of clients) {
+    const { data, error } = await supabase
+      .from("clients")
+      .insert({
+        ...clientData,
+        plan_type: clientData.plan_type as PlanType,
+      })
+      .select("*")
+      .single();
+
+    if (data && !error) {
+      await generateDeadlinesForClient(supabase, data as unknown as Client);
+      results.push({ name: clientData.name, success: true });
+    } else {
+      results.push({ name: clientData.name, success: false, error: error?.message });
+    }
+  }
+
+  revalidatePath("/clients");
+  revalidatePath("/deadlines");
+  revalidatePath("/");
+
+  return results;
+}

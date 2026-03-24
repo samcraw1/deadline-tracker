@@ -11,6 +11,8 @@ import {
   Bell,
   Settings,
   LogOut,
+  Calendar,
+  Columns,
 } from "lucide-react";
 import {
   Sidebar,
@@ -27,6 +29,8 @@ const navItems = [
   { title: "Dashboard", href: "/", icon: LayoutDashboard },
   { title: "Clients", href: "/clients", icon: Users },
   { title: "Deadlines", href: "/deadlines", icon: CalendarClock },
+  { title: "Calendar", href: "/calendar", icon: Calendar },
+  { title: "Kanban", href: "/kanban", icon: Columns },
   { title: "Notice Types", href: "/notice-types", icon: FileText },
   { title: "Alerts", href: "/alerts", icon: Bell },
   { title: "Settings", href: "/settings", icon: Settings },
@@ -62,28 +66,26 @@ export function AppSidebar({
   return (
     <Sidebar>
       <SidebarHeader
-        className="p-6"
-        style={{ borderBottom: "1px solid #1e40af" }}
+        className="p-6 border-b border-sidebar-border"
       >
         <Link href="/" className="flex items-center gap-3">
           <div
-            className="flex items-center justify-center rounded-full"
+            className="flex items-center justify-center rounded-full bg-sidebar-accent"
             style={{
               width: 40,
               height: 40,
-              backgroundColor: "#0066CC",
             }}
           >
-            <CalendarClock style={{ width: 20, height: 20, color: "#ffffff" }} />
+            <CalendarClock className="text-sidebar-accent-foreground" style={{ width: 20, height: 20 }} />
           </div>
           <div>
             <div
-              className="font-bold leading-tight"
-              style={{ color: "#ffffff", fontSize: 16 }}
+              className="font-bold leading-tight text-sidebar-foreground"
+              style={{ fontSize: 16 }}
             >
               Deadline Tracker
             </div>
-            <div style={{ color: "#93c5fd", fontSize: 12 }}>
+            <div className="text-sidebar-primary" style={{ fontSize: 12, opacity: 0.7 }}>
               Compliance Manager
             </div>
           </div>
@@ -102,19 +104,22 @@ export function AppSidebar({
                       className="flex items-center gap-3 rounded-lg text-sm font-medium transition-colors"
                       style={{
                         padding: "12px 16px",
-                        backgroundColor: active ? "#1d4ed8" : "transparent",
-                        color: active ? "#ffffff" : "#bfdbfe",
+                        backgroundColor: active ? "var(--sidebar-accent)" : "transparent",
+                        color: active ? "var(--sidebar-accent-foreground)" : "var(--sidebar-foreground)",
+                        opacity: active ? 1 : 0.8,
                       }}
                       onMouseEnter={(e) => {
                         if (!active) {
-                          e.currentTarget.style.backgroundColor = "#1e40af";
-                          e.currentTarget.style.color = "#ffffff";
+                          e.currentTarget.style.backgroundColor = "var(--sidebar-accent)";
+                          e.currentTarget.style.color = "var(--sidebar-accent-foreground)";
+                          e.currentTarget.style.opacity = "1";
                         }
                       }}
                       onMouseLeave={(e) => {
                         if (!active) {
                           e.currentTarget.style.backgroundColor = "transparent";
-                          e.currentTarget.style.color = "#bfdbfe";
+                          e.currentTarget.style.color = "var(--sidebar-foreground)";
+                          e.currentTarget.style.opacity = "0.8";
                         }
                       }}
                     >
@@ -129,33 +134,34 @@ export function AppSidebar({
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter
-        className="p-4"
-        style={{ borderTop: "1px solid #1e40af" }}
+        className="p-4 border-t border-sidebar-border"
       >
-        <div style={{ color: "#ffffff", fontSize: 13, fontWeight: 500 }}>
+        <div className="text-sidebar-foreground" style={{ fontSize: 13, fontWeight: 500 }}>
           {userEmail}
         </div>
-        <div style={{ color: "#93c5fd", fontSize: 12, marginBottom: 12 }}>
+        <div className="text-sidebar-foreground" style={{ fontSize: 12, marginBottom: 12, opacity: 0.7 }}>
           {userEmail}
         </div>
         <button
           onClick={handleSignOut}
-          className="flex items-center gap-2 rounded-lg text-sm font-medium transition-colors"
+          className="flex items-center gap-2 rounded-lg text-sm font-medium transition-colors text-sidebar-foreground"
           style={{
-            color: "#bfdbfe",
             background: "none",
             border: "none",
             cursor: "pointer",
             padding: "8px 12px",
             marginLeft: -12,
+            opacity: 0.8,
           }}
           onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = "#DC3545";
+            e.currentTarget.style.backgroundColor = "var(--destructive)";
             e.currentTarget.style.color = "#ffffff";
+            e.currentTarget.style.opacity = "1";
           }}
           onMouseLeave={(e) => {
             e.currentTarget.style.backgroundColor = "transparent";
-            e.currentTarget.style.color = "#bfdbfe";
+            e.currentTarget.style.color = "var(--sidebar-foreground)";
+            e.currentTarget.style.opacity = "0.8";
           }}
         >
           <LogOut style={{ width: 16, height: 16 }} />

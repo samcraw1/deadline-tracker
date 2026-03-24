@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { FREQUENCY_LABELS } from "@/lib/constants";
+import { NoticeTypeDialog } from "@/components/notice-types/notice-type-dialog";
 
 export default async function NoticeTypesPage() {
   const supabase = await createClient();
@@ -25,10 +26,15 @@ export default async function NoticeTypesPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-bold">Notice Types</h1>
-      <p className="text-muted-foreground">
-        DOL required notice types that drive deadline generation.
-      </p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold">Notice Types</h1>
+          <p className="text-muted-foreground">
+            DOL required notice types that drive deadline generation.
+          </p>
+        </div>
+        <NoticeTypeDialog />
+      </div>
 
       <div className="rounded-md border">
         <Table>

@@ -11,6 +11,9 @@ import {
 import { DeadlineStatusBadge } from "@/components/deadlines/deadline-status-badge";
 import { DeadlineCountdown } from "@/components/deadlines/deadline-countdown";
 import { UpdateStatusDialog } from "@/components/deadlines/update-status-dialog";
+import { DashboardCharts } from "@/components/dashboard/dashboard-charts";
+import { RiskDashboard } from "@/components/ai/risk-dashboard";
+import { getDashboardChartData } from "@/lib/dashboard-data";
 import { Users, CalendarClock, AlertTriangle, CheckCircle } from "lucide-react";
 import Link from "next/link";
 import type { DeadlineWithJoins } from "@/lib/types/queries";
@@ -45,6 +48,8 @@ export default async function DashboardPage() {
         .eq("status", "sent"),
     ]);
 
+  const chartDataPromise = getDashboardChartData(supabase);
+
   const dueThisWeekResult = await supabase
     .from("deadlines")
     .select("id", { count: "exact" })
@@ -52,6 +57,7 @@ export default async function DashboardPage() {
     .gte("due_date", today)
     .lte("due_date", weekFromNow);
 
+  const chartData = await chartDataPromise;
   const totalClients = clientsResult.count ?? 0;
   const dueThisWeek = dueThisWeekResult.count ?? 0;
   const pendingConfirmation = pendingConfResult.count ?? 0;
@@ -184,6 +190,15 @@ export default async function DashboardPage() {
           </CardContent>
         </Card>
       )}
+
+      <DashboardCharts
+        statusCounts={chartData.statusCounts}
+        monthlyData={chartData.monthlyData}
+        complianceRate={chartData.complianceRate}
+        topOverdueClients={chartData.topOverdueClients}
+      />
+
+      <RiskDashboard />
 
       <Card style={{ boxShadow: "0 1px 3px rgba(0,0,0,0.06)" }}>
         <CardHeader>

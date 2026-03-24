@@ -4,6 +4,7 @@ import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/layout/sidebar";
 import { AppHeader } from "@/components/layout/header";
 import { ChatWidget } from "@/components/chat/chat-widget";
+import { CommandPalette } from "@/components/command-palette";
 
 export default async function DashboardLayout({
   children,
@@ -32,9 +33,10 @@ export default async function DashboardLayout({
       <AppSidebar userRole={userRole} userEmail={userEmail} />
       <SidebarInset>
         <AppHeader userName={userName} userEmail={userEmail} />
-        <main className="flex-1 overflow-auto p-6">{children}</main>
+        <main className="flex-1 overflow-auto p-4 sm:p-6">{children}</main>
       </SidebarInset>
       <ChatWidget />
+      <CommandPalette />
     </SidebarProvider>
   );
 }

@@ -177,6 +177,53 @@ export type Database = {
         };
         Relationships: [];
       };
+      deadline_activities: {
+        Row: {
+          id: string;
+          deadline_id: string;
+          type: "status_change" | "comment" | "assignment";
+          content: string;
+          user_id: string | null;
+          metadata: Record<string, string> | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          deadline_id: string;
+          type: "status_change" | "comment" | "assignment";
+          content: string;
+          user_id?: string | null;
+          metadata?: Record<string, string> | null;
+          created_at?: string;
+        };
+        Update: {
+          deadline_id?: string;
+          type?: "status_change" | "comment" | "assignment";
+          content?: string;
+          user_id?: string | null;
+          metadata?: Record<string, string> | null;
+        };
+        Relationships: [];
+      };
+      deadline_dependencies: {
+        Row: {
+          id: string;
+          deadline_id: string;
+          depends_on_id: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          deadline_id: string;
+          depends_on_id: string;
+          created_at?: string;
+        };
+        Update: {
+          deadline_id?: string;
+          depends_on_id?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
